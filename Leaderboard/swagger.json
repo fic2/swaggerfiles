@@ -1,0 +1,275 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.1.0",
+        "title": "Leaderboard SE",
+        "description": "Store and retrieve highscores",
+        "termsOfService": "see http://mediafi.org/?portfolio=leaderboard#tab-terms-conditions",
+        "contact": {
+            "name": "Marcel Lancelle",
+            "email": "marcel.lancelle@inf.ethz.ch",
+            "url": "http://mediafi.org/?portfolio=leaderboard"
+        },
+        "license": {
+            "name": "MIT",
+            "url": "http://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "130.206.83.3:4567",
+    "basePath": "/lb",
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/{gameID}/{playerID}/score": {
+            "post": {
+                "description": "Posts a new score to the leaderboard.",
+                "operationId": "submitScore",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "gameID",
+                        "in": "path",
+                        "description": "name/ID of game",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "playerID",
+                        "in": "path",
+                        "description": "name/ID of player",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "data to post",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/PostData"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "RankedListEntry",
+                        "schema": {
+                            "$ref": "#/definitions/RankedListEntry"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                }
+            }
+        },
+        "/{gameID}/rankedlist": {
+            "get": {
+                "description": "Returns a ranked list",
+                "operationId": "getRankedList",
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "text/html"
+                ],
+                "parameters": [
+                    {
+                        "name": "gameID",
+                        "in": "path",
+                        "description": "name/ID of game",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tags",
+                        "in": "query",
+                        "description": "tags to filter by",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "csv"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "maximum number of results to return",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "response",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ScoreEntry"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                }
+            }
+        },
+        "/{gameID}/{playerID}/rankingposition": {
+            "get": {
+                "description": "Get rank of player.",
+                "operationId": "getRankingPosition",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "gameID",
+                        "in": "path",
+                        "description": "name/ID of game",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "playerID",
+                        "in": "path",
+                        "description": "name/ID of player",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "response",
+                        "schema": {
+                            "$ref": "#/definitions/Position"
+                        }
+                    },
+                    "default": {
+                        "description": "error"
+                    }
+                }
+            }
+        },
+        "/{gameID}": {
+            "put": {
+                "description": "Create game table.",
+                "operationId": "createTable",
+                "parameters": [
+                    {
+                        "name": "gameID",
+                        "in": "path",
+                        "description": "name/ID of game",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "game table created"
+                    },
+                    "default": {
+                        "description": "error"
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete game table.",
+                "operationId": "deleteTable",
+                "parameters": [
+                    {
+                        "name": "gameID",
+                        "in": "path",
+                        "description": "name/ID of game",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "game table deleted"
+                    },
+                    "default": {
+                        "description": "error"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "RankedListEntry": {
+            "properties": {
+                "playerID": {
+                    "type": "string"
+                },
+                "rankingPosition": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "scoreEntries": {
+                    "schema": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/ScoreEntry"
+                        }
+                    }
+                },
+                "userData": {
+                    "type": "string"
+                },
+                "imgURL": {
+                    "type": "string"
+                }
+            }
+        },
+        "ScoreEntry": {
+            "required": [
+                "name",
+                "value"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "Position": {
+            "properties": {
+                "position": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "PostData": {
+            "properties": {
+                "scoreEntries": {
+                    "description": "latest score(s) to submit",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ScoreEntry"
+                    }
+                },
+                "userData": {
+                    "description": "base64 encoded, any meta data, can be binary, e.g. a screenshot",
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
