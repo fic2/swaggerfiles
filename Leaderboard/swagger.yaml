@@ -56,29 +56,29 @@ paths:
       operationId: getRankedList
       produces:
         - application/json
-        - application/xml
-        - text/xml
-        - text/html
       parameters:
         - name: gameID
           in: path
           description: name/ID of game
           required: true
           type: string
-        - name: tags
+        - name: rankStart
           in: query
-          description: tags to filter by
-          required: false
-          type: array
-          items:
-            type: string
-          collectionFormat: csv
-        - name: limit
-          in: query
-          description: maximum number of results to return
+          description: the rank of the best player requested, for top ten this would be '1'
           required: false
           type: integer
           format: int32
+        - name: rankEnd
+          in: query
+          description: the rank of the worst player requested, for top ten this would be '10'
+          required: false
+          type: integer
+          format: int32
+        - name: orderBy
+          in: query
+          description: string, which score to use for sorting if there are multiple scores, default is 'highscore' 
+          required: false
+          type: string
       responses:
         '200':
           description: response
