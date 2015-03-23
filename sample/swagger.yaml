@@ -1,0 +1,143 @@
+# This is a sample of a swagger implementation for a RESTful service
+swagger: '2.0'
+info:
+  title: Sample API
+  description: Understand swagger with a computer database management system
+  version: "1.0.0"
+
+# The domain of the service
+host: api.sample.com
+
+# Array of all schemes that your API supports
+schemes : 
+  - http
+  - https
+
+# Will be prefixed to all paths (optional)
+basePath: /v1
+
+# What your API produces
+produces:
+  - application/json
+
+# All paths in your API
+paths:
+  /computers:
+    get:
+      summary: List Computers
+      # Description of the use of the path
+      description: |
+        This path gives us a list of computers depending on the filter, 
+        limit and offset parameters.
+      parameters:
+        - name: filter
+          in: query
+          description: content of the filter field
+          type: string
+        - name: limit
+          in: query
+          description: Number of computers that will be return by the request
+          required: true
+          type: number
+          format: int
+        - name: offset
+          in: query
+          description: Number of computers to ignore before getting computers to return
+          required: true
+          type: number
+          format: int
+      # All possible responses that will be delivered by the service
+      responses:
+        # Success
+        200:
+          description: An array of computers
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Computer'
+        # Default answer
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+  # An other path to get a computer given an id          
+  /computer:
+    get:
+      summary: Computer given an id
+      description: |
+        This path gives us a computer depending on the id the service receive
+      parameters:
+        - name: id
+          in: query
+          description: id of the computer we want
+          required: true
+          type: string
+      tags:
+        - Computers
+      responses:
+        200:
+          description: A computer
+          schema:
+            $ref: '#/definitions/Computer'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+  # Other path that didn't require any parameter      
+  /companies:
+    get:
+      summary: List of Companies
+      description: |
+        This path gives us a list of all companies
+      tags:
+        - Companies
+      responses:
+        200:
+          description: An array of companies
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Company'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+# Definition of the model => content of the answers!
+definitions:
+  Computer:
+    properties:
+      computer_id:
+        type: number
+        description: Unique identifier representing a specific computer.
+      computer_name:
+        type: string
+        description: Name of the computer.
+      introduced:
+        type: string
+        description: Date when the computer is add in the system.
+      discontinued:
+        type: string
+        description: Date when the computer is removed from the system.
+      company:
+        type: string
+        description: manufacturer of the company.
+  Company:
+    properties:
+      company_id:
+        type: number
+        description: Unique identifier representing a specific computer.
+      company_name:
+        type: string
+        description: Name of the company
+  Error:
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      fields:
+        type: string
