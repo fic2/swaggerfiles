@@ -24,8 +24,6 @@ paths:
     post:
       description: Posts a new score to the leaderboard.
       operationId: submitScore
-      produces:
-        - application/json
       parameters:
         - name: gameID
           in: path
@@ -45,9 +43,7 @@ paths:
             $ref: "#/definitions/PostData"
       responses:
         '200':
-          description: RankedListEntry
-          schema:
-            $ref: '#/definitions/RankedListEntry'
+          description: confirmation
         default:
           description: unexpected error
   /{gameID}/rankedlist:
@@ -142,22 +138,6 @@ paths:
         default:
           description: error
 definitions:
-  RankedListEntry:
-    properties:
-      playerID:
-        type: string
-      rankingPosition:
-        type: integer
-        format: int64
-      scoreEntries:
-        schema:
-          type: array
-          items:
-            $ref: '#/definitions/ScoreEntry'
-      userData:
-        type: string
-      imgURL:
-        type: string
   ScoreEntry:
     required:
       - name
