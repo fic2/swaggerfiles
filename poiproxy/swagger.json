@@ -30,27 +30,27 @@
           "name" : "service",
           "in" : "query",
           "description" : "A valid POIProxy service (see /poiproxy/describeServices)",
-          "required" : false,
+          "required" : true,
           "type" : "string"
         }, {
           "name" : "z",
           "in" : "query",
           "description" : "Zoom level",
-          "required" : false,
+          "required" : true,
           "type" : "integer",
           "format" : "int32"
         }, {
           "name" : "y",
           "in" : "query",
           "description" : "Y tile",
-          "required" : false,
+          "required" : true,
           "type" : "integer",
           "format" : "int32"
         }, {
           "name" : "x",
           "in" : "query",
           "description" : "X tile",
-          "required" : false,
+          "required" : true,
           "type" : "integer",
           "format" : "int32"
         }, {
@@ -120,34 +120,34 @@
           "name" : "service",
           "in" : "query",
           "description" : "A valid POIProxy service (see /poiproxy/describeServices)",
-          "required" : false,
+          "required" : true,
           "type" : "string"
         }, {
           "name" : "minX",
           "in" : "query",
           "description" : "The minimum X coordinate of the bounding box",
-          "required" : false,
+          "required" : true,
           "type" : "number",
           "format" : "double"
         }, {
           "name" : "minY",
           "in" : "query",
           "description" : "The minimum Y coordinate of the bounding box",
-          "required" : false,
+          "required" : true,
           "type" : "number",
           "format" : "double"
         }, {
           "name" : "maxX",
           "in" : "query",
           "description" : "The maximum X coordinate of the bounding box",
-          "required" : false,
+          "required" : true,
           "type" : "number",
           "format" : "double"
         }, {
           "name" : "maxY",
           "in" : "query",
           "description" : "The maximum Y coordinate of the bounding box",
-          "required" : false,
+          "required" : true,
           "type" : "number",
           "format" : "double"
         }, {
@@ -217,27 +217,27 @@
           "name" : "service",
           "in" : "query",
           "description" : "A valid POIProxy service (see /poiproxy/describeServices)",
-          "required" : false,
+          "required" : true,
           "type" : "string"
         }, {
           "name" : "lon",
           "in" : "query",
           "description" : "Longitude",
-          "required" : false,
+          "required" : true,
           "type" : "number",
           "format" : "double"
         }, {
           "name" : "lat",
           "in" : "query",
           "description" : "Latitude",
-          "required" : false,
+          "required" : true,
           "type" : "number",
           "format" : "double"
         }, {
           "name" : "dist",
           "in" : "query",
           "description" : "Radius distance in meters to browse or search POIs",
-          "required" : false,
+          "required" : true,
           "type" : "integer",
           "format" : "int32"
         }, {
@@ -327,27 +327,27 @@
           "name" : "service",
           "in" : "query",
           "description" : "A valid POIProxy service (see /poiproxy/describeServices)",
-          "required" : false,
+          "required" : true,
           "type" : "string"
         }, {
           "name" : "lon",
           "in" : "query",
           "description" : "Longitude",
-          "required" : false,
+          "required" : true,
           "type" : "number",
           "format" : "double"
         }, {
           "name" : "lat",
           "in" : "query",
           "description" : "Latitude",
-          "required" : false,
+          "required" : true,
           "type" : "number",
           "format" : "double"
         }, {
           "name" : "radius",
           "in" : "query",
           "description" : "Radius distance in meters to browse or search POIs",
-          "required" : false,
+          "required" : true,
           "type" : "integer",
           "format" : "int32"
         }, {
