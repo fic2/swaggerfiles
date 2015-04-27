@@ -1,0 +1,618 @@
+swagger: "2.0"
+info:
+  version: 2.0.0
+  title: DesignMyApp REST API
+  description: "version : 1.0.0"
+  contact:
+    email: "teamdma@excilys.com"
+  termsOfService: "http://www.designmyapp.mobi/#/dma/terms-en"
+definitions:
+  Generation:
+    properties:
+      user:
+        $ref: "#/definitions/User"
+      uuid:
+        type: string
+      name:
+        type: string
+      applicationPackage:
+        type: string
+      customIcon:
+        type: boolean
+      portal:
+        $ref: "#/definitions/Portal"
+      version:
+        type: string
+      template:
+        $ref: "#/definitions/Template"
+  Template:
+    properties:
+      uuid:
+        type: string
+      templateTag:
+        type: string
+      templateName:
+        type: string
+      targets:
+        type: array
+        items:
+          type: string
+  Price:
+    properties: {}
+  ResponseEntity«string»:
+    properties:
+      statusCode: {}
+      body:
+        type: string
+      headers: {}
+  ResponseEntity«OrderConfirmation»:
+    properties:
+      statusCode: {}
+      body: {}
+      headers: {}
+  User:
+    properties:
+      email:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      phoneNumber:
+        type: string
+      portal:
+        $ref: "#/definitions/Portal"
+      password:
+        type: string
+  BuildRequestWrapper:
+    properties:
+      allCarbonCopy:
+        type: string
+      user:
+        $ref: "#/definitions/User"
+      generation:
+        $ref: "#/definitions/Generation"
+  ResponseEntity:
+    properties:
+      statusCode: {}
+      body: {}
+      headers: {}
+  Portal:
+    properties:
+      name:
+        type: string
+  ResponseEntity«UploadResponse»:
+    properties:
+      statusCode: {}
+      body: {}
+      headers: {}
+  Pricing:
+    properties:
+      templatePrice:
+        $ref: "#/definitions/Price"
+  PortalPricing:
+    properties:
+      _id:
+        type: string
+      genericPricing:
+        $ref: "#/definitions/Pricing"
+      templateTag:
+        type: string
+      pricing:
+        $ref: "#/definitions/Pricing"
+      portal:
+        $ref: "#/definitions/Portal"
+  ResponseEntity«List«Order»»:
+    properties:
+      statusCode: {}
+      body:
+        type: array
+        items:
+          $ref: "#/definitions/Order"
+      headers: {}
+  ResponseEntity«User»:
+    properties:
+      statusCode: {}
+      body: {}
+      headers: {}
+  Order:
+    properties:
+      ip:
+        type: string
+      price:
+        $ref: "#/definitions/Price"
+      paid:
+        type: boolean
+      ipnId:
+        type: string
+      customerName:
+        type: string
+      paymentDate: {}
+      paypalId:
+        type: string
+      _id:
+        type: string
+      generated:
+        type: boolean
+      user:
+        $ref: "#/definitions/User"
+      generation:
+        $ref: "#/definitions/Generation"
+      exception:
+        type: string
+      date: {}
+paths:
+  /build:
+    post:
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ResponseEntity«OrderConfirmation»"
+        "201":
+          description: Created
+        "401":
+          description: "Unauthorized : the request user is using a protected email"
+        "403":
+          description: "Forbidden : waiting for payment"
+        "404":
+          description: Not Found
+      description: build
+      summary: Build App
+      operationId: build
+      parameters:
+        - in: body
+          description: buildRequestWrapper
+          name: buildRequestWrapper
+          required: false
+          schema:
+            $ref: "#/definitions/BuildRequestWrapper"
+        - in: formData
+          description: "language !! should be in body !!"
+          name: language
+          required: false
+          type: string
+          default: ""
+  "/build/android/{appId}":
+    get:
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ResponseEntity"
+        "401":
+          description: Unauthorized
+        "403":
+          description: "Forbidden : waiting for payment"
+        "404":
+          description: Not Found
+      description: ""
+      summary: Download Android App
+      operationId: downloadApk
+      parameters:
+        - in: path
+          description: appId
+          name: appId
+          required: true
+          type: string
+          default: ""
+  "/build/ios/{appId}":
+    get:
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ResponseEntity"
+        "401":
+          description: Unauthorized
+        "403":
+          description: "Forbidden : waiting for payment"
+        "404":
+          description: Not Found
+      description: ""
+      summary: Download iOS App
+      operationId: downloadIpa
+      parameters:
+        - in: path
+          description: appId
+          name: appId
+          required: true
+          type: string
+          default: ""
+  "/build/webapp/{appId}":
+    get:
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ResponseEntity"
+        "401":
+          description: Unauthorized
+        "403":
+          description: "Forbidden : waiting for payment"
+        "404":
+          description: Not Found
+      description: ""
+      summary: Download Webapp App
+      operationId: downloadApk
+      parameters:
+        - in: path
+          description: appId
+          name: appId
+          required: true
+          type: string
+          default: ""
+  "/build/state/{appId}":
+    get:
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ResponseEntity«string»"
+        "401":
+          description: Unauthorized
+        "403":
+          description: "Forbidden : waiting for payment"
+        "404":
+          description: Not Found
+        "503":
+          description: "Unavailable : the application is being build"
+      description: ""
+      summary: Check build state
+      operationId: getAppState
+      parameters:
+        - in: path
+          description: appId
+          name: appId
+          required: true
+          type: string
+          default: ""
+  "/file/{appId}/{namespace}":
+    post:
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ResponseEntity«UploadResponse»"
+        "201":
+          description: Created
+        "400":
+          description: "Bad Request : invalid filename"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "415":
+          description: "Unsupported Media Type : invalid extension"
+      description: ""
+      summary: Upload file
+      operationId: uploadFile
+      parameters:
+        - in: formData
+          description: inputPart
+          name: "files[]"
+          required: true
+          type: file
+          default: ""
+        - in: path
+          description: appId
+          name: appId
+          required: true
+          type: string
+          default: ""
+        - in: path
+          description: namespace
+          name: namespace
+          required: true
+          type: string
+          default: ""
+        - in: query
+          description: archiveNamespace
+          name: archiveNamespace
+          required: false
+          type: string
+          default: ""
+  "/file/{appId}/{namespace}/{filename}":
+    delete:
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ResponseEntity"
+        "204":
+          description: No Content
+        "400":
+          description: "Bad Request : invalid filename"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "415":
+          description: "Unsupported Media Type : invalid extension"
+      description: Delete file
+      operationId: deleteFile
+      summary: Delete file
+      parameters:
+        - in: path
+          description: appId
+          name: appId
+          required: true
+          type: string
+          default: ""
+        - in: path
+          description: namespace
+          name: namespace
+          required: true
+          type: string
+          default: ""
+        - in: path
+          description: fileName
+          name: filename
+          required: true
+          type: string
+          default: ""
+        - in: query
+          description: path
+          name: path
+          required: false
+          type: string
+          default: ""
+    get:
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: "Bad Request : invalid filename"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "415":
+          description: "Unsupported Media Type : invalid extension"
+      description: Retrieve a previously uploaded file
+      operationId: deleteFile
+      summary: Retrieve uploaded file
+      parameters:
+        - in: path
+          description: appId
+          name: appId
+          required: true
+          type: string
+          default: ""
+        - in: path
+          description: namespace
+          name: namespace
+          required: true
+          type: string
+          default: ""
+        - in: path
+          description: fileName
+          name: filename
+          required: true
+          type: string
+          default: ""
+        - in: query
+          description: path
+          name: path
+          required: false
+          type: string
+          default: ""
+  /prices:
+    get:
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/PortalPricing"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      description: ""
+      summary: Retrieve pricing
+      operationId: getPricingByPortalNameAndTemplateTag
+      parameters:
+        - in: query
+          description: templateTag
+          name: templateTag
+          required: true
+          type: string
+          default: ""
+  "/template/{templateTag}":
+    get:
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/Generation"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      description: ""
+      summary: Initialize an app
+      operationId: initGeneration
+      parameters:
+        - in: path
+          description: templateTag
+          name: templateTag
+          required: true
+          type: string
+          default: ""
+  "/template/{templateTag}/{appId}":
+    get:
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/Generation"
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      description: ""
+      summary: Duplicate an app
+      operationId: initGenerationCopy
+      parameters:
+        - in: path
+          description: templateTag
+          name: templateTag
+          required: true
+          type: string
+          default: ""
+        - in: path
+          description: appId
+          name: appId
+          required: true
+          type: string
+          default: ""
+  /user:
+    get:
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ResponseEntity«User»"
+        "401":
+          description: "Unauthorized : token is invalid or expired"
+        "403":
+          description: "Forbidden : user does not exist"
+        "404":
+          description: Not Found
+      description: ""
+      summary: Retrieve logged user
+      operationId: retrieve
+    put:
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ResponseEntity«User»"
+        "201":
+          description: Created
+        "400":
+          description: "Bad Request : user already exists"
+        "401":
+          description: "Unauthorized : token is invalid or expired"
+        "403":
+          description: "Forbidden : invalid user"
+        "404":
+          description: Not Found
+      description: Create a new user account or updates user account after first login
+      operationId: retrieve
+      summary: Signup user
+      parameters:
+        - in: body
+          description: newUser
+          name: newUser
+          required: false
+          schema:
+            $ref: "#/definitions/User"
+  /user/apps:
+    get:
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ResponseEntity«List«Order»»"
+        "401":
+          description: "Unauthorized : token is invalid or expired"
+        "403":
+          description: "Forbidden : user does not exist"
+        "404":
+          description: Not Found
+      description: ""
+      summary: Retrieve generated apps
+      operationId: getApplicationList
+  /user/login:
+    post:
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ResponseEntity«User»"
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: "Forbidden : wrong user credentials"
+        "404":
+          description: Not Found
+      description: ""
+      summary: Login user to service
+      operationId: login
+      parameters:
+        - in: body
+          description: user
+          name: user
+          required: false
+          schema:
+            $ref: "#/definitions/User"
+  /user/logout:
+    post:
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ResponseEntity«User»"
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: "Forbidden : wrong user credentials"
+        "404":
+          description: Not Found
+      description: ""
+      summary: Logout user to service
+      operationId: logout
+  /user/reset_password:
+    post:
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ResponseEntity"
+        "201":
+          description: Created
+        "400":
+          description: "Bad Request : wrong email format"
+        "401":
+          description: Unauthorized
+        "403":
+          description: "Forbidden : user does not exist"
+        "404":
+          description: Not Found
+      description: ""
+      summary: Reset password
+      operationId: resetPassword
+      parameters:
+        - in: body
+          description: email
+          name: email
+          required: false
+          schema:
+            type: string
+        - in: formData
+          description: "language !!should be in body !!"
+          name: language
+          required: false
+          type: string
+          default: ""
+host: api.designmyapp.mobi
+basePath: /2.0/
+schemes:
+  - http
