@@ -44,7 +44,7 @@
         },
         "y": {
             "name": "y",
-            "description": "Tile index along",
+            "description": "Tile index along y-axis",
             "in": "path",
             "required": true,
             "type": "integer",
@@ -85,7 +85,7 @@
         },
         "/{provider}/{z}/{x}/{y}-asset.xml": {
             "get": {
-                "summary": "Model references to be included into the DOM's 3D scene",
+                "summary": "Tile's assets",
                 "parameters": [
                     {
                         "$ref": "#/parameters/provider"
