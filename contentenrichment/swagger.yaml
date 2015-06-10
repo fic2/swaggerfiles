@@ -1,0 +1,1994 @@
+swagger: '2.0'
+info:
+  title: BitTubes Interactive Video API
+  description: IMPORTANT - add and update calls mention that some parameters are supposed to be in the body instead of in the query - that is NOT the case. Swagger would not work otherwise, that's the only reason why it says "body".
+  version: "10.0"
+# the domain of the service
+host: nlv.bittubes.com
+# array of all schemes that your API supports
+schemes:
+  - https
+  - http
+# will be prefixed to all paths
+basePath: /db/json/10
+produces:
+  - application/json
+  - application/javascript
+paths:
+            
+            
+###### GET SPECIAL
+  /uid:
+    get:
+      tags:
+        - public
+        - get
+      summary: get video by UID
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: query
+          description: video uid.
+          required: true
+          type: string
+          format: case-sensitive
+      responses:
+        200:
+          description: An array of products
+          schema:
+            $ref: '#/definitions/Video'
+        # 400:
+        #   description: HTTPS required for non-public functions
+        #   schema:
+        #     $ref: '#/definitions/Error'
+        # 401:
+        #   description: Autherization required for non-public functions
+        #   schema:
+        #     $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /ulid:
+    get:
+      tags:
+        - public
+        - get
+      summary: get video playlist by ULID
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: query
+          description: playlist ulid.
+          required: true
+          type: string
+          format: case-sensitive
+      responses:
+        200:
+          description: the requested video
+          schema:
+            $ref: '#/definitions/Playlist'
+        # 400:
+        #   description: HTTPS required for non-public functions
+        #   schema:
+        #     $ref: '#/definitions/Error'
+        # 401:
+        #   description: Autherization required for non-public functions
+        #   schema:
+        #     $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+
+###### GET
+
+  /getVideo :
+    post:
+      tags:
+        - basic auth required
+        - get
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: query
+          description: the item ID
+          required: true
+          type: integer
+        - name: p2
+          in: query
+          description: recursive
+          required: true
+          type: boolean
+      responses:
+        200:
+          description: the requested item
+          schema:
+            $ref: '#/definitions/Video'
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /getObject :
+    post:
+      tags:
+        - basic auth required
+        - get
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: query
+          description: the item ID
+          required: true
+          type: integer
+      responses:
+        200:
+          description: the requested item
+          schema:
+            $ref: '#/definitions/Object'
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /getLink :
+    post:
+      tags:
+        - basic auth required
+        - get
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: query
+          description: the item ID
+          required: true
+          type: integer
+      responses:
+        200:
+          description: the requested item
+          schema:
+            $ref: '#/definitions/Link'
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /getTag :
+    post:
+      tags:
+        - basic auth required
+        - get
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: query
+          description: the item ID
+          required: true
+          type: integer
+      responses:
+        200:
+          description: the requested item
+          schema:
+            $ref: '#/definitions/Tag'
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /getKeyframe :
+    post:
+      tags:
+        - basic auth required
+        - get
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: query
+          description: the item ID
+          required: true
+          type: integer
+      responses:
+        200:
+          description: the requested item
+          schema:
+            $ref: '#/definitions/KeyFrame'
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /getPoint :
+    post:
+      tags:
+        - basic auth required
+        - get
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: query
+          description: the point index
+          required: true
+          type: integer
+        - name: p2
+          in: query
+          description: the Keyframe_ID
+          required: true
+          type: integer
+      responses:
+        200:
+          description: the requested item
+          schema:
+            $ref: '#/definitions/Point'
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /getConfig :
+    post:
+      tags:
+        - basic auth required
+        - get
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: query
+          description: the parameter name
+          required: true
+          type: integer
+        - name: p2
+          in: query
+          description: the Video_ID
+          required: true
+          type: integer
+      responses:
+        200:
+          description: the requested item
+          schema:
+            $ref: '#/definitions/Config'
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /getConfigByUID :
+    post:
+      tags:
+        - basic auth required
+        - get
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: query
+          description: the parameter name
+          required: true
+          type: integer
+        - name: p2
+          in: query
+          description: the video UID
+          required: true
+          type: integer
+      responses:
+        200:
+          description: the requested item
+          schema:
+            $ref: '#/definitions/Config'
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+            
+###### GET-LIST
+
+  /getVideos :
+    post:
+      tags:
+        - basic auth required
+        - get list
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: query
+          description: extended
+          required: false
+          type: boolean
+      responses:
+        200:
+          description: very shortened requested item list
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Video'
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /getVideoList :
+    post:
+      tags:
+        - basic auth required
+        - get list
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: query
+          description: recursive
+          required: false
+          type: boolean
+      responses:
+        200:
+          description: the requested item list
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Video'
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /getObjectList :
+    post:
+      tags:
+        - basic auth required
+        - get list
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: query
+          description: the Video_ID
+          required: true
+          type: integer
+      responses:
+        200:
+          description: the requested item list
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Object'
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /getLinkList :
+    post:
+      tags:
+        - basic auth required
+        - get list
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: query
+          description: the Object_ID
+          required: true
+          type: integer
+      responses:
+        200:
+          description: the requested item list
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Link'
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /getTagList :
+    post:
+      tags:
+        - basic auth required
+        - get list
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: query
+          description: the Object_ID
+          required: true
+          type: integer
+      responses:
+        200:
+          description: the requested item list
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Tag'
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /getKeyframeList :
+    post:
+      tags:
+        - basic auth required
+        - get list
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: query
+          description: the Tag_ID
+          required: true
+          type: integer
+      responses:
+        200:
+          description: the requested item list
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/KeyFrame'
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /getPointList :
+    post:
+      tags:
+        - basic auth required
+        - get list
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: query
+          description: the Keyframe_ID
+          required: true
+          type: integer
+      responses:
+        200:
+          description: the requested item list
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Point'
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /getPlaylists :
+    post:
+      tags:
+        - basic auth required
+        - get list
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+      responses:
+        200:
+          description: the requested item list
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Playlist_short'
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /getConfigList :
+    post:
+      tags:
+        - basic auth required
+        - get list
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: query
+          description: the Video_ID
+          required: true
+          type: integer
+      responses:
+        200:
+          description: the requested item list
+          schema:
+            $ref: '#/definitions/Config'
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+            
+###### SAVE
+
+  /saveConfig :
+    post:
+      tags:
+        - basic auth required
+        - add
+        - update
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: body
+          description: the item to be added/replaced
+          required: true
+          schema:
+            $ref: '#/definitions/Config_post'
+      responses:
+        200:
+          description: the new item with new unique ID
+          schema:
+            $ref: '#/definitions/Config'
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+            
+            
+###### ADD
+
+  /addVideo :
+    post:
+      tags:
+        - basic auth required
+        - add
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: body
+          description: the item to be added
+          required: true
+          schema:
+            $ref: '#/definitions/Video'
+        - name: p2
+          in: query
+          description: recursive
+          required: false
+          type: boolean
+      responses:
+        200:
+          description: the new item with new unique ID
+          schema:
+            $ref: '#/definitions/Video'
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /addObject :
+    post:
+      tags:
+        - basic auth required
+        - add
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: body
+          description: the item to be added
+          required: true
+          schema:
+            $ref: '#/definitions/Object'
+      responses:
+        200:
+          description: the new item with unique ID
+          schema:
+            $ref: '#/definitions/Object'
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /addLink :
+    post:
+      tags:
+        - basic auth required
+        - add
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: body
+          description: the item to be added
+          required: true
+          schema:
+            $ref: '#/definitions/Link'
+        - name: p2
+          in: query
+          description: recursive
+          required: false
+          type: boolean
+      responses:
+        200:
+          description: the new item with unique ID
+          schema:
+            $ref: '#/definitions/Link'
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /addTag :
+    post:
+      tags:
+        - basic auth required
+        - add
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: body
+          description: the item to be added
+          required: true
+          schema:
+            $ref: '#/definitions/Tag'
+        - name: p2
+          in: query
+          description: recursive
+          required: false
+          type: boolean
+      responses:
+        200:
+          description: the new item with unique ID
+          schema:
+            $ref: '#/definitions/Tag'
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /addKeyframe :
+    post:
+      tags:
+        - basic auth required
+        - add
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: body
+          description: the item to be added
+          required: true
+          schema:
+            $ref: '#/definitions/KeyFrame'
+        - name: p2
+          in: query
+          description: recursive
+          required: false
+          type: boolean
+      responses:
+        200:
+          description: the new item with unique ID
+          schema:
+            $ref: '#/definitions/KeyFrame'
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /addPoints : # yes, plural
+    post:
+      tags:
+        - basic auth required
+        - add
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: query
+          description: point-index
+          required: false
+          type: boolean
+        - name: p2
+          in: body
+          description: the item to be added
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Point'
+      responses:
+        200:
+          description: the new item with unique ID
+          schema:
+            $ref: '#/definitions/KeyFrame'
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /addPlaylist :
+    post:
+      tags:
+        - basic auth required
+        - add
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: body
+          description: the item to be added
+          required: true
+          schema:
+            $ref: '#/definitions/Playlist'
+        - name: p2
+          in: query
+          description: recursive
+          required: false
+          type: boolean
+      responses:
+        200:
+          description: the new item with unique ID
+          schema:
+            $ref: '#/definitions/Playlist'
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+            
+###### UPDATE
+
+  /updateVideo :
+    post:
+      tags:
+        - basic auth required
+        - update
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: body
+          description: the item to be updated
+          required: true
+          schema:
+            $ref: '#/definitions/Video'
+        - name: p2
+          in: query
+          description: recursive
+          required: false
+          type: boolean
+      responses:
+        200:
+          description: the updated item
+          schema:
+            $ref: '#/definitions/Video'
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /updateObject :
+    post:
+      tags:
+        - basic auth required
+        - update
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: body
+          description: the item to be updated
+          required: true
+          schema:
+            $ref: '#/definitions/Object'
+      responses:
+        200:
+          description: the updated item
+          schema:
+            $ref: '#/definitions/Object'
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /updateLink :
+    post:
+      tags:
+        - basic auth required
+        - update
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: body
+          description: the item to be updated
+          required: true
+          schema:
+            $ref: '#/definitions/Link'
+        - name: p2
+          in: query
+          description: recursive
+          required: false
+          type: boolean
+      responses:
+        200:
+          description: the updated item
+          schema:
+            $ref: '#/definitions/Link'
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /updateTag :
+    post:
+      tags:
+        - basic auth required
+        - update
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: body
+          description: the item to be updated
+          required: true
+          schema:
+            $ref: '#/definitions/Tag'
+        - name: p2
+          in: query
+          description: recursive
+          required: false
+          type: boolean
+      responses:
+        200:
+          description: the updated item
+          schema:
+            $ref: '#/definitions/Tag'
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /updateKeyframe :
+    post:
+      tags:
+        - basic auth required
+        - update
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: body
+          description: the item to be updated
+          required: true
+          schema:
+            $ref: '#/definitions/KeyFrame'
+        - name: p2
+          in: query
+          description: recursive
+          required: false
+          type: boolean
+      responses:
+        200:
+          description: the updated item
+          schema:
+            $ref: '#/definitions/KeyFrame'
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /updatePoint :
+    post:
+      tags:
+        - basic auth required
+        - update
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: body
+          description: the item to be updated
+          required: true
+          schema:
+            $ref: '#/definitions/Point'
+      responses:
+        200:
+          description: the updated item
+          schema:
+            $ref: '#/definitions/Point'
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /updatePlaylist :
+    post:
+      tags:
+        - basic auth required
+        - update
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: body
+          description: the item to be updated
+          required: true
+          schema:
+            $ref: '#/definitions/Playlist'
+        - name: p2
+          in: query
+          description: recursive
+          required: false
+          type: boolean
+      responses:
+        200:
+          description: the updated item
+          schema:
+            $ref: '#/definitions/Playlist'
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /updateDoLink :
+    post:
+      tags:
+        - basic auth required
+        - update
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: query
+          description: the Object_ID
+          required: true
+          type: integer
+        - name: p2
+          in: query
+          description: DirectOpen
+          required: true
+          type: string
+      responses:
+        200:
+          description: the updated item
+          # schema:
+          #   $ref: '#/definitions/Video'
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /updatePublic :
+    post:
+      tags:
+        - basic auth required
+        - update
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: query
+          description: the Video_ID
+          required: true
+          type: integer
+        - name: p2
+          in: query
+          description: Public status
+          required: true
+          type: boolean
+      responses:
+        200:
+          description: the updated item
+          # schema:
+          #   $ref: '#/definitions/Video'
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+            
+###### DELETE
+
+  /deleteVideo :
+    post:
+      tags:
+        - basic auth required
+        - delete
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: query
+          description: the item ID to be deleted
+          required: true
+          type: integer
+      responses:
+        200:
+          description: OK
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /deleteObject :
+    post:
+      tags:
+        - basic auth required
+        - delete
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: query
+          description: the item ID to be deleted
+          required: true
+          type: integer
+      responses:
+        200:
+          description: OK
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /deleteLink :
+    post:
+      tags:
+        - basic auth required
+        - delete
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: query
+          description: the item ID to be deleted
+          required: true
+          type: integer
+      responses:
+        200:
+          description: OK
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /deleteTag :
+    post:
+      tags:
+        - basic auth required
+        - delete
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: query
+          description: the item ID to be deleted
+          required: true
+          type: integer
+      responses:
+        200:
+          description: OK
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /deleteKeyframe :
+    post:
+      tags:
+        - basic auth required
+        - delete
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: query
+          description: the item ID to be deleted
+          required: true
+          type: integer
+      responses:
+        200:
+          description: OK
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /deletePoints : # yes, plural
+    post:
+      tags:
+        - basic auth required
+        - delete
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: query
+          description: the point index to be deleted
+          required: true
+          type: integer
+        - name: p2
+          in: query
+          description: the Keyframe_ID where this points is to be deleted
+          required: true
+          type: integer
+      responses:
+        200:
+          description: OK
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /deletePlaylist :
+    post:
+      tags:
+        - basic auth required
+        - delete
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: query
+          description: the item ID to be deleted
+          required: true
+          type: integer
+      responses:
+        200:
+          description: OK
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /deleteConfig :
+    post:
+      tags:
+        - basic auth required
+        - delete
+      summary: ...
+      description: |
+        ...
+      parameters:
+        - name: api
+          in: query
+          description: account id
+          required: true
+          type: string
+        - name: p
+          in: query
+          description: Parameter name
+          required: true
+          type: integer
+        - name: p2
+          in: query
+          description: the Video_ID where this parameter shall be deleted
+          required: true
+          type: integer
+      responses:
+        200:
+          description: OK
+        400:
+          description: HTTPS required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Autherization required for non-public functions
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+
+definitions:
+  Point:
+    properties:
+      ID:
+        type: integer
+        format: int32
+        description: only in POST requests, never in API returns
+      Shape_ID:
+        type: integer
+        format: int32
+        description: legacy name for KeyFrame_ID; only in POST requests, never in API returns
+      X:
+        type: integer
+        format: int32
+        description: x-coord relative to video width (0...1)
+      Y:
+        type: integer
+        format: int32
+        description: y-coord relative to video height (0...1)
+  KeyFrame:
+    properties:
+      ID:
+        type: integer
+        format: int32
+        description: internal ID
+      Appearance_ID:
+        type: integer
+        format: int32
+        description: legacy name for Tag_ID; only in POST requests, never in API returns
+      Time:
+        type: integer
+        format: int32
+        description: Video time in ms
+      Point:
+        type: array
+        items:
+          $ref: '#/definitions/Point'
+  Link:
+    properties:
+      ID:
+        type: integer
+        format: int32
+        description: internal ID
+      Object_ID:
+        type: integer
+        format: int32
+        description: only in POST requests, never in API returns
+      Type:
+        type: string
+        description: link-type (link, pin, video...)
+      Time:
+        type: integer
+        format: int32
+        description: Video time in ms
+  Tag:
+    properties:
+      ID:
+        type: integer
+        format: int32
+        description: internal ID
+      Object_ID:
+        type: integer
+        format: int32
+        description: only in POST requests, never in API returns
+      Index:
+        type: integer
+        format: int32
+        description: z-index of tag
+      Begin:
+        type: integer
+        format: int32
+        description: Time of first KeyFrame
+      End:
+        type: integer
+        format: int32
+        description: Time of last KeyFrame
+      PointLength:
+        type: integer
+        format: int32
+        description: amount of points in each KeyFrame
+      KeyFrame:
+        type: array
+        items:
+          $ref: '#/definitions/KeyFrame'
+  Object:
+    properties:
+      ID:
+        type: integer
+        format: int32
+        description: internal ID
+      Video_ID:
+        type: integer
+        format: int32
+        description: only in POST requests, never in API returns
+      Description:
+        type: string
+        description: text saying sth about the object
+      IconUri:
+        type: string
+        description: path to object image
+      LongName:
+        type: string
+        description: full name of the object
+      PinName:
+        type: string
+        description: abbreviated name of the object
+      DirectOpen:
+        type: string
+        description: link-type that shall be opened directly
+      Hits:
+        type: integer
+        format: int32
+        description: counter for clicks made on this object
+      Link:
+        type: array
+        items:
+          $ref: '#/definitions/Link'
+      Tag:
+        type: array
+        items:
+          $ref: '#/definitions/Tag'
+  Config:
+    properties:
+      posterImageUri:
+        type: string
+      autoPlay:
+        type: boolean
+      startVolume:
+        type: number
+      videoTitleTime:
+        type: integer
+  Config_post:
+    properties:
+      Video_ID:
+        type: integer
+        description: ...
+      Param:
+        type: string
+        description: the name of the config-parameter
+      Val:
+        type: string
+        description: the value of the parameter
+      CastType:
+        type: string
+        description: bool, int, float, <empty-string> (for string)
+  Source:
+    properties:
+      ID:
+        type: integer
+        format: int32
+        description: internal ID
+      Video_ID:
+        type: integer
+        format: int32
+        description: only in POST requests, never in API returns
+      URI:
+        type: string
+        description: video url
+      Type:
+        type: string
+        description: hd or sd
+  Video:
+    properties:
+      ID:
+        type: integer
+        format: int32
+        description: internal ID
+      UID:
+        type: string
+        description: public ID, 5 characters, case-sensitive
+      W:
+        type: integer
+        format: int32
+        description: Video-width
+      H:
+        type: integer
+        format: int32
+        description: Video-height
+      Duration:
+        type: integer
+        format: int32
+        description: Video duration in ms
+      StartTime:
+        type: integer
+        format: int32
+        description: default video start-time in ms
+      Object:
+        type: array
+        items:
+          $ref: '#/definitions/Object'
+      Source:
+        type: array
+        items:
+          $ref: '#/definitions/Source'
+      Config:
+        type: object
+        items:
+          $ref: '#/definitions/Config'
+  Playlist_short:
+    properties:
+      ID:
+        type: integer
+        format: int32
+        description: internal ID
+      ULID:
+        type: string
+        description: public ID, 5 characters, case-sensitive
+      button:
+        type: string
+        description: Name of playlist
+  Playlist:
+    properties:
+      ID:
+        type: integer
+        format: int32
+        description: internal ID
+      ULID:
+        type: string
+        description: public ID, 5 characters, case-sensitive
+      button:
+        type: string
+        description: Name of playlist
+      type:
+        type: string
+        description: video or videolist
+      link:
+        type: integer
+        format: int32
+        description: referencing either a video UID or a playlist ID
+      auto:
+        type: boolean
+        description: played automatically if user chooses nothing else (only one per group of children
+      dir:
+        type: boolean
+        description: not yet implemented; show this entry in index
+      hidden:
+        type: boolean
+        description: allows hiding this button from sight
+      sort:
+        type: integer
+        format: int32
+        description: starting at 0, sorts buttons
+  Error:
+    properties:
+      error:
+        type: string
+        description: message detailing what went wrong
+      function:
+        type: string
