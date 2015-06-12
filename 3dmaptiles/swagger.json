@@ -53,7 +53,7 @@
         }
     },
     "paths": {
-        "/{provider}/{z}/{x}/{y}.xml": {
+        "/{provider}/{zoom}/{x}/{y}.xml": {
             "get": {
                 "summary": "Model references to be included into the DOM's 3D scene",
                 "parameters": [
@@ -83,7 +83,7 @@
                 }
             }
         },
-        "/{provider}/{z}/{x}/{y}-asset.xml": {
+        "/{provider}/{zoom}/{x}/{y}-asset.xml": {
             "get": {
                 "summary": "Tile's assets",
                 "parameters": [
@@ -113,7 +113,7 @@
                 }
             }
         },
-        "/{provider}/{z}/{x}/{y}-texture.png": {
+        "/{provider}/{zoom}/{x}/{y}-texture.png": {
             "get": {
                 "summary": "Texture used in the tile's assets",
                 "parameters": [
