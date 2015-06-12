@@ -23,8 +23,8 @@
             "required": true,
             "type": "string"
         },
-        "z": {
-            "name": "z",
+        "zoom": {
+            "name": "zoom",
             "description": "Level of detail",
             "in": "path",
             "required": true,
@@ -61,7 +61,7 @@
                         "$ref": "#/parameters/provider"
                     },
                     {
-                        "$ref": "#/parameters/z"
+                        "$ref": "#/parameters/zoom"
                     },
                     {
                         "$ref": "#/parameters/x"
@@ -91,7 +91,7 @@
                         "$ref": "#/parameters/provider"
                     },
                     {
-                        "$ref": "#/parameters/z"
+                        "$ref": "#/parameters/zoom"
                     },
                     {
                         "$ref": "#/parameters/x"
@@ -121,7 +121,7 @@
                         "$ref": "#/parameters/provider"
                     },
                     {
-                        "$ref": "#/parameters/z"
+                        "$ref": "#/parameters/zoom"
                     },
                     {
                         "$ref": "#/parameters/x"
