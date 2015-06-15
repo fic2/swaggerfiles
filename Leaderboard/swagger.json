@@ -27,45 +27,6 @@
         "application/json"
     ],
     "paths": {
-        "/{gameID}/{playerID}/score": {
-            "post": {
-                "description": "Posts a new score to the leaderboard.",
-                "operationId": "submitScore",
-                "parameters": [
-                    {
-                        "name": "gameID",
-                        "in": "path",
-                        "description": "name/ID of game",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "playerID",
-                        "in": "path",
-                        "description": "name/ID of player",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "data to post",
-                        "required": false,
-                        "schema": {
-                            "$ref": "#/definitions/PostData"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "confirmation"
-                    },
-                    "default": {
-                        "description": "unexpected error"
-                    }
-                }
-            }
-        },
         "/{gameID}/rankedlist": {
             "get": {
                 "description": "Returns a ranked list",
@@ -157,6 +118,51 @@
                 }
             }
         },
+        "/{gameID}/{playerID}/score": {
+            "post": {
+                "description": "Posts a new score to the leaderboard.",
+                "operationId": "submitScore",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "gameID",
+                        "in": "path",
+                        "description": "name/ID of game",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "playerID",
+                        "in": "path",
+                        "description": "name/ID of player",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "data to post",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PostData"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "RankedListEntry",
+                        "schema": {
+                            "$ref": "#/definitions/RankedListEntry"
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                }
+            }
+        },
         "/{gameID}": {
             "put": {
                 "description": "Create game table.",
@@ -168,6 +174,15 @@
                         "description": "name/ID of game",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "game table options",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/CreateOptions"
+                        }
                     }
                 ],
                 "responses": {
@@ -203,6 +218,29 @@
         }
     },
     "definitions": {
+        "RankedListEntry": {
+            "properties": {
+                "playerID": {
+                    "type": "string"
+                },
+                "rankingPosition": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "scoreEntries": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ScoreEntry"
+                    }
+                },
+                "userData": {
+                    "type": "string"
+                },
+                "imgURL": {
+                    "type": "string"
+                }
+            }
+        },
         "ScoreEntry": {
             "required": [
                 "name",
@@ -229,7 +267,7 @@
         "PostData": {
             "properties": {
                 "scoreEntries": {
-                    "description": "latest score(s) to submit",
+                    "description": "latest score(s) to submit, one entry with 'highScore' is required",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/ScoreEntry"
@@ -238,6 +276,26 @@
                 "userData": {
                     "description": "base64 encoded, any meta data, can be binary, e.g. a screenshot",
                     "type": "string"
+                }
+            }
+        },
+        "CreateOptions": {
+            "properties": {
+                "maxEntries": {
+                    "type": "integer",
+                    "description": "max. number of highscores, use 0 for unlimited"
+                },
+                "onlyKeepBestEntry": {
+                    "type": "boolean",
+                    "description": "keep only one (the best) score of every player (true) or all scores (false)"
+                },
+                "highScoreNames": {
+                    "type": "string",
+                    "description": "list of additional high score columns, separated by ','"
+                },
+                "socialnetwork": {
+                    "type": "string",
+                    "description": "URL of Social Network enabler to automatically post new highscores to"
                 }
             }
         }
