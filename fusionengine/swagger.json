@@ -5,7 +5,7 @@
         "description": "Basic API to access to POI data generated after the     fusion\n",
         "version": "0.2.0"
     },
-    
+    "host": « 158.42.188.78:8080",
     "schemes": [
         "http"
     ],
