@@ -8,6 +8,7 @@
     "schemes": [
         "http"
     ],
+    "host": "fic2fatts.tts.mivoq.it",
     "basePath": "/",
     "produces": [
         "application/json"
