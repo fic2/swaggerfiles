@@ -11,7 +11,7 @@
       "version":"1.0.0"
      
    },
-   "host": "<Insert_host_here>",
+   "host": "195.220.224.14:4444",
    "schemes": [
         "http"
     ],
