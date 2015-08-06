@@ -1,0 +1,217 @@
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: HbbTV Application Toolkit
+  description: HAT provides a CMS with a set of GUI templates that can be filled with content via an easy-to-use HTML5-based user interface. A REST-API to the content model of the HbbTV App Toolkit SE’s CMS allows its integration into the CMS used by content creators in their production environment. In addition to the CMS the HbbTV App Toolkit SE supports HbbTV developers by providing a library with solutions for recurrent tasks, e.g. navigation through a button list, scrollable elements, channel change, etc.
+  contact:
+    name: Robert Seeliger
+    email: robert.seeliger@fokus.fraunhofer.de
+    url: https://www.fokus.fraunhofer.de/go/fame
+  license:
+    name: Full licence
+    url: http://hat.fokus.fraunhofer.de:8080/license/license.txt
+
+host: hat.fokus.fraunhofer.de:8080
+schemes:
+  - http 
+basePath: /api
+produces:
+  - application/json
+  
+paths:
+  /login:
+    post:
+      description: |
+        User Login
+      parameters:
+        - name: username
+          in: formData    
+          required: true
+          type: string
+        - name: password
+          in: formData    
+          required: true
+          type: string
+          
+      responses:
+        200:
+          description: User is logged in
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  
+  /logout:
+    post:
+      description: |
+        User Logout
+      responses:
+        200:
+          description: User is logged out
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  
+  /apps:
+    get:
+      description: |
+        Returns all apps from the system that the user has the access to
+      responses:
+        200:
+          description: Successful response, array of applications
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/App'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post: 
+      description: |
+        Enables the user to generate new apps
+      parameters:
+        - name: title
+          in: formData
+          type: string
+          required: true
+        - name: data
+          in: formData
+          type: string
+          required: true
+    
+      responses:
+        200:
+          description: new application was created
+          
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    
+  /apps/{id}:
+    get:
+      description: |
+        Returns `App` object with given id
+      parameters:
+        - name: id
+          in: path
+          description: Application ID
+          required: true
+          type: string
+      responses:
+        200:
+          description: Successful response, Application Object
+          schema:
+            $ref: '#/definitions/App'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put: 
+      description: |
+        Enables the user to update an existing app
+      parameters:
+        - name: id
+          in: path
+          description: Application ID
+          required: true
+          type: string
+        - name: title
+          in: formData
+          type: string
+          required: true
+        - name: data
+          in: formData
+          type: string
+          required: true
+    
+      responses:
+        200:
+          description: existing application was updated
+
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    patch: 
+      description: |
+        Enables the user to publish an existing app
+      parameters:
+        - name: id
+          in: path
+          description: Application ID
+          required: true
+          type: string
+      
+      responses:
+        200:
+          description: existing application was published
+
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete: 
+      description: |
+        Enables the user to delete an existing app
+      parameters:
+        - name: id
+          in: path
+          description: Application ID
+          required: true
+          type: string
+      
+      responses:
+        200:
+          description: existing application was successfully deleted
+
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+                  
+definitions:
+  App:
+    required:
+      - data
+      - title
+    properties:
+      _id:
+        type: string
+      data: 
+        type: string
+      owner:
+        type: string
+      title:
+        type: string
+      creationDate:
+        type: string
+        format: date-time
+      alternationDate:
+        type: string
+        format: date-time
+  # User:
+  #   required:
+  #     - username
+  #     - password
+  #   properties:
+  #     username:
+  #       type: string
+  #     password:
+  #       type: string
+  #       format: password
+  #     fullname:
+  #       type: string
+  #     company: 
+  #       type: string
+
+  Error:
+    properties:
+      error:
+        type: string
+        description: message detailing what went wrong
+      function:
+        type: string
+  
