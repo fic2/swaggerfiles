@@ -141,6 +141,13 @@
                         "type": "string"
                     },
                     {
+                        "name": "auth",
+                        "in": "query",
+                        "description": "simple password authentication (optional)",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
                         "in": "body",
                         "name": "body",
                         "description": "data to post",
@@ -176,6 +183,13 @@
                         "type": "string"
                     },
                     {
+                        "name": "auth",
+                        "in": "query",
+                        "description": "simple password authentication (optional)",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
                         "in": "body",
                         "name": "body",
                         "description": "game table options",
@@ -203,6 +217,13 @@
                         "in": "path",
                         "description": "name/ID of game",
                         "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "auth",
+                        "in": "query",
+                        "description": "simple password authentication (optional)",
+                        "required": false,
                         "type": "string"
                     }
                 ],

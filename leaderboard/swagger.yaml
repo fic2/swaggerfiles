@@ -99,6 +99,11 @@ paths:
           description: name/ID of player
           required: true
           type: string
+        - name: auth
+          in: query
+          description: simple password authentication (optional)
+          required: false
+          type: string
         - in: body
           name: body
           description: data to post
@@ -122,6 +127,11 @@ paths:
           description: name/ID of game
           required: true
           type: string
+        - name: auth
+          in: query
+          description: simple password authentication (optional)
+          required: false
+          type: string
         - in: body
           name: body
           description: game table options
@@ -141,6 +151,11 @@ paths:
           in: path
           description: name/ID of game
           required: true
+          type: string
+        - name: auth
+          in: query
+          description: simple password authentication (optional)
+          required: false
           type: string
       responses:
         '204':
