@@ -8,7 +8,7 @@ info:
     name: Heike Horstmann
     email: heike.horstmann@iais.fraunhofer.de
     url: http://mediafi.org/?portfolio=audio-mining
-host: http://195.220.224.14:49154
+host: 195.220.224.14:49154
 basePath: /
 schemes:
   - http
@@ -17,7 +17,7 @@ consumes:
 produces:
   - application/json
 paths:
-  /createIndex:
+  /:
     post:
       description: |
         Create a new index
@@ -35,10 +35,10 @@ paths:
       responses:
         '201':
           description: ObjectUpdateResponseType 
-  /{indexid}/createAsset:
+  /{indexid}/:
     post:
       description: |
-        Create a new asset 
+        Insert a new asset and analyze it 
       parameters:
         - name: indexid
           in: path
@@ -48,7 +48,7 @@ paths:
       responses:
         '201':
           description: AnalysisResponseType 
-  /{indexid}/listAssets:
+  /{indexid}/:
     get:
       description: |
         List all assets of an index 
@@ -61,7 +61,7 @@ paths:
       responses:
         '201':
           description: AssetListResponse 
-  /{indexid}/{assetid}/getAssetMetadata:
+  /{indexid}/{assetid}/:
     get:
       description: |
         Obtain plain asset metadata 
@@ -79,7 +79,7 @@ paths:
       responses:
         '200':
           description: Mpeg7
-  /{indexid}/deleteIndex:
+  /{indexid}/:
     delete:
       description: |
         Delete index and all assets in it  
@@ -92,7 +92,7 @@ paths:
       responses:
         '200':
           description: ObjectUpdateResponseType 
-  /{indexid}/{assetid}/deleteAsset:
+  /{indexid}/{assetid}/:
     delete:
       description: |
         Delete a single asset 
@@ -110,7 +110,7 @@ paths:
       responses:
         '200':
           description: ObjectUpdateResponseType 
-  /{indexid}/{assetid}/getAssetTranscript:
+  /{indexid}/{assetid}/transcript:
     get:
       description: |
         Obtain asset transcript 
@@ -128,7 +128,7 @@ paths:
       responses:
         '200':
           description: TranscriptResponseType 
-  /{indexid}/{assetid}/getAssetKeywords:
+  /{indexid}/{assetid}/keywords:
     get:
       description: |
         Obtain asset keywords
@@ -146,7 +146,7 @@ paths:
       responses:
         '200':
           description: KeywordResponseType 
-  /{indexid}/{assetid}/getAssetStatus:
+  /{indexid}/{assetid}/status:
     get:
       description: |
         Obtain asset status 
@@ -164,10 +164,10 @@ paths:
       responses:
         '200':
           description: AssetStatusResponseType 
-  /{indexid}/{assetid}/getAssetStructrue:
+  /{indexid}/{assetid}/structure:
     get:
       description: |
-        Obtain asset segmentation structre
+        Obtain asset segmentation structure
       parameters:
         - name: indexid
           in: path
@@ -182,7 +182,7 @@ paths:
       responses:
         '200':
           description: StructureResponseType 
-  /{indexid}/{assetid}/getAssetSubtitles:
+  /{indexid}/{assetid}/subtitles:
     get:
       description: |
         Obtain asset subtitles in SRT format 
@@ -200,7 +200,7 @@ paths:
       responses:
         '200':
           description: text/plain 
-  /{indexid}/{assetid}/getRecommendations:
+  /{indexid}/{assetid}/recommendations:
     get:
       description: |
         Receive recommendations for a given asset 

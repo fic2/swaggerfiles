@@ -11,7 +11,7 @@
             "url": "http://mediafi.org/?portfolio=audio-mining"
         }
     },
-    "host": "http://195.220.224.14:49154",
+    "host": "195.220.224.14:49154",
     "basePath": "/",
     "schemes": [
         "http"
@@ -23,7 +23,7 @@
         "application/json"
     ],
     "paths": {
-        "/createIndex": {
+        "/": {
             "post": {
                 "description": "Create a new index\n",
                 "parameters": [
@@ -49,9 +49,9 @@
                 }
             }
         },
-        "/{indexid}/createAsset": {
+        "/{indexid}/": {
             "post": {
-                "description": "Create a new asset \n",
+                "description": "Insert a new asset and analyze it \n",
                 "parameters": [
                     {
                         "name": "indexid",
@@ -68,7 +68,7 @@
                 }
             }
         },
-        "/{indexid}/listAssets": {
+        "/{indexid}/": {
             "get": {
                 "description": "List all assets of an index \n",
                 "parameters": [
@@ -87,7 +87,7 @@
                 }
             }
         },
-        "/{indexid}/{assetid}/getAssetMetadata": {
+        "/{indexid}/{assetid}/": {
             "get": {
                 "description": "Obtain plain asset metadata \n",
                 "parameters": [
@@ -113,7 +113,7 @@
                 }
             }
         },
-        "/{indexid}/deleteIndex": {
+        "/{indexid}/": {
             "delete": {
                 "description": "Delete index and all assets in it  \n",
                 "parameters": [
@@ -132,7 +132,7 @@
                 }
             }
         },
-        "/{indexid}/{assetid}/deleteAsset": {
+        "/{indexid}/{assetid}/": {
             "delete": {
                 "description": "Delete a single asset \n",
                 "parameters": [
@@ -158,7 +158,7 @@
                 }
             }
         },
-        "/{indexid}/{assetid}/getAssetTranscript": {
+        "/{indexid}/{assetid}/transcript": {
             "get": {
                 "description": "Obtain asset transcript \n",
                 "parameters": [
@@ -184,7 +184,7 @@
                 }
             }
         },
-        "/{indexid}/{assetid}/getAssetKeywords": {
+        "/{indexid}/{assetid}/keywords": {
             "get": {
                 "description": "Obtain asset keywords\n",
                 "parameters": [
@@ -210,7 +210,7 @@
                 }
             }
         },
-        "/{indexid}/{assetid}/getAssetStatus": {
+        "/{indexid}/{assetid}/status": {
             "get": {
                 "description": "Obtain asset status \n",
                 "parameters": [
@@ -236,9 +236,9 @@
                 }
             }
         },
-        "/{indexid}/{assetid}/getAssetStructrue": {
+        "/{indexid}/{assetid}/structure": {
             "get": {
-                "description": "Obtain asset segmentation structre\n",
+                "description": "Obtain asset segmentation structure\n",
                 "parameters": [
                     {
                         "name": "indexid",
@@ -262,7 +262,7 @@
                 }
             }
         },
-        "/{indexid}/{assetid}/getAssetSubtitles": {
+        "/{indexid}/{assetid}/subtitles": {
             "get": {
                 "description": "Obtain asset subtitles in SRT format \n",
                 "parameters": [
@@ -288,7 +288,7 @@
                 }
             }
         },
-        "/{indexid}/{assetid}/getRecommendations": {
+        "/{indexid}/{assetid}/recommendations": {
             "get": {
                 "description": "Receive recommendations for a given asset \n",
                 "parameters": [
