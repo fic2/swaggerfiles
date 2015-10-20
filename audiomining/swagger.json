@@ -11,7 +11,7 @@
             "url": "http://mediafi.org/?portfolio=audio-mining"
         }
     },
-    "host": "http://195.220.224.14:49154",
+    "host": "195.220.224.14:49154",
     "basePath": "/",
     "schemes": [
         "http"
@@ -158,7 +158,7 @@
                 }
             }
         },
-        "/{indexid}/{assetid}/getAssetTranscript": {
+        "/{indexid}/{assetid}/transcript": {
             "get": {
                 "description": "Obtain asset transcript \n",
                 "parameters": [
@@ -184,7 +184,7 @@
                 }
             }
         },
-        "/{indexid}/{assetid}/getAssetKeywords": {
+        "/{indexid}/{assetid}/keywords": {
             "get": {
                 "description": "Obtain asset keywords\n",
                 "parameters": [
@@ -210,7 +210,7 @@
                 }
             }
         },
-        "/{indexid}/{assetid}/getAssetStatus": {
+        "/{indexid}/{assetid}/status": {
             "get": {
                 "description": "Obtain asset status \n",
                 "parameters": [
@@ -236,9 +236,9 @@
                 }
             }
         },
-        "/{indexid}/{assetid}/getAssetStructrue": {
+        "/{indexid}/{assetid}/structure": {
             "get": {
-                "description": "Obtain asset segmentation structre\n",
+                "description": "Obtain asset segmentation structure\n",
                 "parameters": [
                     {
                         "name": "indexid",
@@ -262,7 +262,7 @@
                 }
             }
         },
-        "/{indexid}/{assetid}/getAssetSubtitles": {
+        "/{indexid}/{assetid}/subtitles": {
             "get": {
                 "description": "Obtain asset subtitles in SRT format \n",
                 "parameters": [

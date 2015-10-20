@@ -8,7 +8,7 @@ info:
     name: Heike Horstmann
     email: heike.horstmann@iais.fraunhofer.de
     url: http://mediafi.org/?portfolio=audio-mining
-host: http://195.220.224.14:49154
+host: 195.220.224.14:49154
 basePath: /
 schemes:
   - http
@@ -110,7 +110,7 @@ paths:
       responses:
         '200':
           description: ObjectUpdateResponseType 
-  /{indexid}/{assetid}/getAssetTranscript:
+  /{indexid}/{assetid}/transcript:
     get:
       description: |
         Obtain asset transcript 
@@ -128,7 +128,7 @@ paths:
       responses:
         '200':
           description: TranscriptResponseType 
-  /{indexid}/{assetid}/getAssetKeywords:
+  /{indexid}/{assetid}/keywords:
     get:
       description: |
         Obtain asset keywords
@@ -146,7 +146,7 @@ paths:
       responses:
         '200':
           description: KeywordResponseType 
-  /{indexid}/{assetid}/getAssetStatus:
+  /{indexid}/{assetid}/status:
     get:
       description: |
         Obtain asset status 
@@ -164,10 +164,10 @@ paths:
       responses:
         '200':
           description: AssetStatusResponseType 
-  /{indexid}/{assetid}/getAssetStructrue:
+  /{indexid}/{assetid}/structure:
     get:
       description: |
-        Obtain asset segmentation structre
+        Obtain asset segmentation structure
       parameters:
         - name: indexid
           in: path
@@ -182,7 +182,7 @@ paths:
       responses:
         '200':
           description: StructureResponseType 
-  /{indexid}/{assetid}/getAssetSubtitles:
+  /{indexid}/{assetid}/subtitles:
     get:
       description: |
         Obtain asset subtitles in SRT format 
