@@ -25,7 +25,7 @@
     "paths": {
         "/": {
             "post": {
-                "description": "Create a new index\n",
+                "description": "Create a new index",
                 "parameters": [
                     {
                         "name": "indexid",
@@ -66,54 +66,7 @@
                         "description": "AnalysisResponseType"
                     }
                 }
-            }
-        },
-        "/{indexid}/": {
-            "get": {
-                "description": "List all assets of an index \n",
-                "parameters": [
-                    {
-                        "name": "indexid",
-                        "in": "path",
-                        "description": "Index to be used",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "AssetListResponse"
-                    }
-                }
-            }
-        },
-        "/{indexid}/{assetid}/": {
-            "get": {
-                "description": "Obtain plain asset metadata \n",
-                "parameters": [
-                    {
-                        "name": "indexid",
-                        "in": "path",
-                        "description": "Index to be used",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "assetid",
-                        "in": "path",
-                        "description": "Desired asset",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Mpeg7"
-                    }
-                }
-            }
-        },
-        "/{indexid}/": {
+            },
             "delete": {
                 "description": "Delete index and all assets in it  \n",
                 "parameters": [
@@ -128,6 +81,23 @@
                 "responses": {
                     "200": {
                         "description": "ObjectUpdateResponseType"
+                    }
+                }
+            },
+            "get": {
+                "description": "List all assets of an index \n",
+                "parameters": [
+                    {
+                        "name": "indexid",
+                        "in": "path",
+                        "description": "Index to be used",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "AssetListResponse"
                     }
                 }
             }
@@ -154,6 +124,30 @@
                 "responses": {
                     "200": {
                         "description": "ObjectUpdateResponseType"
+                    }
+                }
+            },
+            "get": {
+                "description": "Obtain plain asset metadata \n",
+                "parameters": [
+                    {
+                        "name": "indexid",
+                        "in": "path",
+                        "description": "Index to be used",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "assetid",
+                        "in": "path",
+                        "description": "Desired asset",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mpeg7"
                     }
                 }
             }

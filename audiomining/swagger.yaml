@@ -1,14 +1,14 @@
 swagger: '2.0'
 info:
-  version: "1.7"
+  version: '1.7'
   title: Audio Mining SE
   description: Analyze and explore audio visual media
-  termsOfService: see http://mediafi.org/?portfolio=audio-mining#tab-terms-conditions
+  termsOfService: 'see http://mediafi.org/?portfolio=audio-mining#tab-terms-conditions'
   contact:
     name: Heike Horstmann
     email: heike.horstmann@iais.fraunhofer.de
-    url: http://mediafi.org/?portfolio=audio-mining
-host: 195.220.224.14:49154
+    url: 'http://mediafi.org/?portfolio=audio-mining'
+host: '195.220.224.14:49154'
 basePath: /
 schemes:
   - http
@@ -19,8 +19,7 @@ produces:
 paths:
   /:
     post:
-      description: |
-        Create a new index
+      description: "Create a new index"
       parameters:
         - name: indexid
           in: query
@@ -34,200 +33,188 @@ paths:
           type: string
       responses:
         '201':
-          description: ObjectUpdateResponseType 
-  /{indexid}/:
+          description: ObjectUpdateResponseType
+  '/{indexid}/':
     post:
-      description: |
-        Insert a new asset and analyze it 
+      description: "Insert a new asset and analyze it \n"
       parameters:
         - name: indexid
           in: path
-          description: Index to be used 
+          description: Index to be used
           required: true
           type: string
       responses:
         '201':
-          description: AnalysisResponseType 
-  /{indexid}/:
-    get:
-      description: |
-        List all assets of an index 
+          description: AnalysisResponseType
+    delete:
+      description: "Delete index and all assets in it  \n"
       parameters:
         - name: indexid
           in: path
-          description: Index to be used 
+          description: Index to be used
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ObjectUpdateResponseType
+    get:
+      description: "List all assets of an index \n"
+      parameters:
+        - name: indexid
+          in: path
+          description: Index to be used
           required: true
           type: string
       responses:
         '201':
-          description: AssetListResponse 
-  /{indexid}/{assetid}/:
-    get:
-      description: |
-        Obtain plain asset metadata 
+          description: AssetListResponse
+  '/{indexid}/{assetid}/':
+    delete:
+      description: "Delete a single asset \n"
       parameters:
         - name: indexid
           in: path
-          description: Index to be used 
+          description: Index to be used
           required: true
           type: string
         - name: assetid
           in: path
-          description: Desired asset 
+          description: Desired asset
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ObjectUpdateResponseType
+    get:
+      description: "Obtain plain asset metadata \n"
+      parameters: 
+        - name: indexid
+          in: path
+          description: Index to be used
+          required: true
+          type: string
+        - name: assetid
+          in: path
+          description: Desired asset
           required: true
           type: string
       responses:
         '200':
           description: Mpeg7
-  /{indexid}/:
-    delete:
-      description: |
-        Delete index and all assets in it  
-      parameters:
-        - name: indexid
-          in: path
-          description: Index to be used 
-          required: true
-          type: string
-      responses:
-        '200':
-          description: ObjectUpdateResponseType 
-  /{indexid}/{assetid}/:
-    delete:
-      description: |
-        Delete a single asset 
-      parameters:
-        - name: indexid
-          in: path
-          description: Index to be used 
-          required: true
-          type: string
-        - name: assetid
-          in: path
-          description: Desired asset 
-          required: true
-          type: string
-      responses:
-        '200':
-          description: ObjectUpdateResponseType 
-  /{indexid}/{assetid}/transcript:
+  '/{indexid}/{assetid}/transcript':
     get:
-      description: |
-        Obtain asset transcript 
+      description: "Obtain asset transcript \n"
       parameters:
         - name: indexid
           in: path
-          description: Index to be used 
+          description: Index to be used
           required: true
           type: string
         - name: assetid
           in: path
-          description: Desired asset 
+          description: Desired asset
           required: true
           type: string
       responses:
         '200':
-          description: TranscriptResponseType 
-  /{indexid}/{assetid}/keywords:
+          description: TranscriptResponseType
+  '/{indexid}/{assetid}/keywords':
     get:
       description: |
         Obtain asset keywords
       parameters:
         - name: indexid
           in: path
-          description: Index to be used 
+          description: Index to be used
           required: true
           type: string
         - name: assetid
           in: path
-          description: Desired asset 
+          description: Desired asset
           required: true
           type: string
       responses:
         '200':
-          description: KeywordResponseType 
-  /{indexid}/{assetid}/status:
+          description: KeywordResponseType
+  '/{indexid}/{assetid}/status':
     get:
-      description: |
-        Obtain asset status 
+      description: "Obtain asset status \n"
       parameters:
         - name: indexid
           in: path
-          description: Index to be used 
+          description: Index to be used
           required: true
           type: string
         - name: assetid
           in: path
-          description: Desired asset 
+          description: Desired asset
           required: true
           type: string
       responses:
         '200':
-          description: AssetStatusResponseType 
-  /{indexid}/{assetid}/structure:
+          description: AssetStatusResponseType
+  '/{indexid}/{assetid}/structure':
     get:
       description: |
         Obtain asset segmentation structure
       parameters:
         - name: indexid
           in: path
-          description: Index to be used 
+          description: Index to be used
           required: true
           type: string
         - name: assetid
           in: path
-          description: Desired asset 
+          description: Desired asset
           required: true
           type: string
       responses:
         '200':
-          description: StructureResponseType 
-  /{indexid}/{assetid}/subtitles:
+          description: StructureResponseType
+  '/{indexid}/{assetid}/subtitles':
     get:
-      description: |
-        Obtain asset subtitles in SRT format 
+      description: "Obtain asset subtitles in SRT format \n"
       parameters:
         - name: indexid
           in: path
-          description: Index to be used 
+          description: Index to be used
           required: true
           type: string
         - name: assetid
           in: path
-          description: Desired asset 
+          description: Desired asset
           required: true
           type: string
       responses:
         '200':
-          description: text/plain 
-  /{indexid}/{assetid}/recommendations:
+          description: text/plain
+  '/{indexid}/{assetid}/recommendations':
     get:
-      description: |
-        Receive recommendations for a given asset 
+      description: "Receive recommendations for a given asset \n"
       parameters:
         - name: indexid
           in: path
-          description: Index to be used 
+          description: Index to be used
           required: true
           type: string
         - name: assetid
           in: path
-          description: Desired asset 
+          description: Desired asset
           required: true
           type: string
       responses:
         '200':
           description: RecommendationResponseType
-  /{indexid}/search:
+  '/{indexid}/search':
     post:
       description: |
         Send a search request
       parameters:
         - name: indexid
           in: path
-          description: Index to be used 
+          description: Index to be used
           required: true
           type: string
       responses:
         '200':
-          description: SearchResponseType 
+          description: SearchResponseType
