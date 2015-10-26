@@ -59,6 +59,15 @@
                         "description": "Index to be used",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Text to enrich",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/AnalysisRequestType"
+                        }
                     }
                 ],
                 "responses": {
@@ -180,7 +189,7 @@
         },
         "/{indexid}/{assetid}/keywords": {
             "get": {
-                "description": "Obtain asset keywords\n",
+                "description": "Obtain asset keywords",
                 "parameters": [
                     {
                         "name": "indexid",
@@ -282,9 +291,9 @@
                 }
             }
         },
-        "/{indexid}/{assetid}/recommendations": {
-            "get": {
-                "description": "Receive recommendations for a given asset \n",
+        "/{indexid}/search-managed": {
+            "post": {
+                "description": "Send a search request \n",
                 "parameters": [
                     {
                         "name": "indexid",
@@ -294,30 +303,13 @@
                         "type": "string"
                     },
                     {
-                        "name": "assetid",
-                        "in": "path",
-                        "description": "Desired asset",
+                        "in": "body",
+                        "name": "body",
+                        "description": "Text to enrich",
                         "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "RecommendationResponseType"
-                    }
-                }
-            }
-        },
-        "/{indexid}/search": {
-            "post": {
-                "description": "Send a search request\n",
-                "parameters": [
-                    {
-                        "name": "indexid",
-                        "in": "path",
-                        "description": "Index to be used",
-                        "required": true,
-                        "type": "string"
+                        "schema": {
+                            "$ref": "#/definitions/SearchRequestType"
+                        }
                     }
                 ],
                 "responses": {
@@ -325,6 +317,149 @@
                         "description": "SearchResponseType"
                     }
                 }
+            }
+        }
+    },
+    "definitions": {
+        "SearchRequestType": {
+            "required": [
+                "query",
+                "indexID",
+                "searchType"
+            ],
+            "properties": {
+                "query": {
+                    "type": "string"
+                },
+                "relevantMediaAssetID": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "indexID": {
+                    "type": "string"
+                },
+                "searchType": {
+                    "type": "string",
+                    "enum": [
+                        "word"
+                    ]
+                },
+                "context": {
+                    "type": "boolean"
+                },
+                "contextDuration": {
+                    "type": "integer"
+                },
+                "similarity": {
+                    "type": "integer"
+                },
+                "offset": {
+                    "type": "integer"
+                },
+                "limit": {
+                    "type": "integer"
+                },
+                "documentContextSize": {
+                    "type": "integer"
+                },
+                "speakerID": {
+                    "type": "string"
+                }
+            }
+        },
+        "AnalysisRequestType": {
+            "required": [
+                "indexId",
+                "assetId",
+                "assetUri"
+            ],
+            "properties": {
+                "indexId": {
+                    "type": "string"
+                },
+                "genre": {
+                    "$ref": "#/definitions/Genre"
+                },
+                "structuralAnalysisConfig": {
+                    "$ref": "#/definitions/StructuralAnalysisConfig"
+                },
+                "speechRecognitionConfig": {
+                    "$ref": "#/definitions/SpeechRecognitionConfig"
+                },
+                "speakerRecognitionConfig": {
+                    "$ref": "#/definitions/SpeakerRecognitionConfig"
+                },
+                "externalMetadata": {
+                    "type": "string"
+                },
+                "assetId": {
+                    "type": "string"
+                },
+                "assetUri": {
+                    "type": "string"
+                },
+                "assetTitle": {
+                    "type": "string"
+                },
+                "creationDate": {
+                    "type": "integer"
+                }
+            }
+        },
+        "Genre": {
+            "properties": {
+                "name": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "definition": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "term": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "href": {
+                    "type": "string"
+                }
+            }
+        },
+        "StructuralAnalysisConfig": {
+            "properties": {
+                "segmentationFlag": {
+                    "type": "boolean"
+                },
+                "speechDetectionFlag": {
+                    "type": "boolean"
+                },
+                "speakerClusteringFlag": {
+                    "type": "boolean"
+                },
+                "genderDetectionFlag": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "SpeechRecognitionConfig": {
+            "properties": {
+                "wordRecognitionFlag": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "SpeakerRecognitionConfig": {
+            "type": "array",
+            "items": {
+                "type": "string"
             }
         }
     }
