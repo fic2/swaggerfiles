@@ -63,7 +63,7 @@
                     {
                         "in": "body",
                         "name": "body",
-                        "description": "Text to enrich",
+                        "description": "AnalysisRequestType",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/AnalysisRequestType"
@@ -291,7 +291,7 @@
                 }
             }
         },
-        "/{indexid}/search-managed": {
+        "/{indexid}/searcher-managed": {
             "post": {
                 "description": "Send a search request \n",
                 "parameters": [
@@ -305,7 +305,7 @@
                     {
                         "in": "body",
                         "name": "body",
-                        "description": "Text to enrich",
+                        "description": "SearchRequestType",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/SearchRequestType"
@@ -371,33 +371,33 @@
         },
         "AnalysisRequestType": {
             "required": [
-                "indexId",
-                "assetId",
-                "assetUri"
+                "indexID",
+                "assetID",
+                "assetURI"
             ],
             "properties": {
-                "indexId": {
+                "indexID": {
                     "type": "string"
                 },
                 "genre": {
                     "$ref": "#/definitions/Genre"
                 },
-                "structuralAnalysisConfig": {
-                    "$ref": "#/definitions/StructuralAnalysisConfig"
-                },
-                "speechRecognitionConfig": {
+                "SpeechRecognitionConfig": {
                     "$ref": "#/definitions/SpeechRecognitionConfig"
                 },
-                "speakerRecognitionConfig": {
+                "StructuralAnalysisConfig": {
+                    "$ref": "#/definitions/StructuralAnalysisConfig"
+                },
+                "SpeakerRecognitionConfig": {
                     "$ref": "#/definitions/SpeakerRecognitionConfig"
                 },
                 "externalMetadata": {
                     "type": "string"
                 },
-                "assetId": {
+                "assetID": {
                     "type": "string"
                 },
-                "assetUri": {
+                "assetURI": {
                     "type": "string"
                 },
                 "assetTitle": {
@@ -457,9 +457,13 @@
             }
         },
         "SpeakerRecognitionConfig": {
-            "type": "array",
-            "items": {
-                "type": "string"
+            "properties": {
+                "speakerRecognitionList": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
             }
         }
     }
