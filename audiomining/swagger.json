@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "version": "1.7",
+        "version": "1.6.3",
         "title": "Audio Mining SE",
         "description": "Analyze and explore audio visual media",
         "termsOfService": "see http://mediafi.org/?portfolio=audio-mining#tab-terms-conditions",
@@ -376,23 +376,20 @@
                 "assetURI"
             ],
             "properties": {
-                "indexID": {
-                    "type": "string"
-                },
                 "genre": {
                     "$ref": "#/definitions/Genre"
                 },
-                "SpeechRecognitionConfig": {
+                "speechRecognitionConfig": {
                     "$ref": "#/definitions/SpeechRecognitionConfig"
                 },
-                "StructuralAnalysisConfig": {
+                "structuralAnalysisConfig": {
                     "$ref": "#/definitions/StructuralAnalysisConfig"
                 },
-                "SpeakerRecognitionConfig": {
+                "speakerRecognitionConfig": {
                     "$ref": "#/definitions/SpeakerRecognitionConfig"
                 },
                 "externalMetadata": {
-                    "type": "string"
+                    "$ref": "#/definitions/ExternalMetadata"
                 },
                 "assetID": {
                     "type": "string"
@@ -401,6 +398,9 @@
                     "type": "string"
                 },
                 "assetTitle": {
+                    "type": "string"
+                },
+                "indexID": {
                     "type": "string"
                 },
                 "creationDate": {
@@ -463,6 +463,122 @@
                     "items": {
                         "type": "string"
                     }
+                }
+            }
+        },
+        "ExternalMetadata": {
+            "properties": {
+                "Titles": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/TitleType"
+                    }
+                },
+                "Identifiers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/IdentifierType"
+                    }
+                },
+                "Abstract": {
+                    "type": "string"
+                },
+                "Descriptors": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DescriptorType"
+                    }
+                },
+                "Person": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/PersonType"
+                    }
+                },
+                "Dates": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DateType"
+                    }
+                }
+            }
+        },
+        "TitleType": {
+            "required": [
+                "Type",
+                "Title"
+            ],
+            "properties": {
+                "Type": {
+                    "type": "string"
+                },
+                "Title": {
+                    "type": "string"
+                }
+            }
+        },
+        "IdentifierType": {
+            "required": [
+                "Type",
+                "Identifier"
+            ],
+            "properties": {
+                "Type": {
+                    "type": "string"
+                },
+                "Identifier": {
+                    "type": "string"
+                }
+            }
+        },
+        "DescriptorType": {
+            "required": [
+                "Type",
+                "Descriptor"
+            ],
+            "properties": {
+                "Type": {
+                    "type": "string"
+                },
+                "Descriptor": {
+                    "type": "string"
+                },
+                "Identifier": {
+                    "type": "string"
+                }
+            }
+        },
+        "PersonType": {
+            "required": [
+                "Name",
+                "Display"
+            ],
+            "properties": {
+                "Name": {
+                    "type": "string"
+                },
+                "Display": {
+                    "type": "string"
+                },
+                "Role": {
+                    "type": "string"
+                },
+                "Identifier": {
+                    "type": "string"
+                }
+            }
+        },
+        "DateType": {
+            "required": [
+                "Type",
+                "Date"
+            ],
+            "properties": {
+                "Type": {
+                    "type": "string"
+                },
+                "Date": {
+                    "type": "integer"
                 }
             }
         }
