@@ -45,7 +45,7 @@ paths:
           type: string
         - in: body
           name: body
-          description: Text to enrich
+          description: AnalysisRequestType
           required: true
           schema:
             $ref: '#/definitions/AnalysisRequestType'
@@ -126,7 +126,7 @@ paths:
           description: TranscriptResponseType
   '/{indexid}/{assetid}/keywords':
     get:
-      description: "Obtain asset keywords"
+      description: Obtain asset keywords
       parameters:
         - name: indexid
           in: path
@@ -204,7 +204,7 @@ paths:
           type: string
         - in: body
           name: body
-          description: Text to enrich
+          description: SearchRequestType
           required: true
           schema:
             $ref: '#/definitions/SearchRequestType'
@@ -227,10 +227,9 @@ definitions:
       indexID:
         type: string
       searchType:
-        type:
-          string
+        type: string
         enum:
-            - word
+          - word
       context:
         type: boolean
       contextDuration:
@@ -302,6 +301,8 @@ definitions:
       wordRecognitionFlag:
         type: boolean
   SpeakerRecognitionConfig:
-    type: array
-    items:
-      type: string
+    properties:
+      speakerRecognitionList:
+        type: array
+        items:
+          type: string

@@ -63,7 +63,7 @@
                     {
                         "in": "body",
                         "name": "body",
-                        "description": "Text to enrich",
+                        "description": "AnalysisRequestType",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/AnalysisRequestType"
@@ -305,7 +305,7 @@
                     {
                         "in": "body",
                         "name": "body",
-                        "description": "Text to enrich",
+                        "description": "SearchRequestType",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/SearchRequestType"
@@ -457,9 +457,13 @@
             }
         },
         "SpeakerRecognitionConfig": {
-            "type": "array",
-            "items": {
-                "type": "string"
+            "properties": {
+                "speakerRecognitionList": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
             }
         }
     }
