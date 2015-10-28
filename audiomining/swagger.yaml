@@ -320,76 +320,76 @@ definitions:
           type: string
   ExternalMetadata:
     properties:
-      Titles:
+      titles:
         type: array
         items:
           $ref: '#/definitions/TitleType'
-      Identifiers:
+      identifiers:
         type: array
         items:
           $ref: '#/definitions/IdentifierType'
-      Abstract:
+      abstract:
         type: string
-      Descriptors:
+      descriptors:
         type: array
         items:
           $ref: '#/definitions/DescriptorType'
-      Person:
+      person:
         type: array
         items:
           $ref: '#/definitions/PersonType'
-      Dates:
+      dates:
         type: array
         items:
           $ref: '#/definitions/DateType'
   TitleType:
     required:
-      - Type
-      - Title
+      - type
+      - title
     properties:
-      Type: 
+      type: 
         type: string
-      Title:
+      title:
         type: string
   IdentifierType:
     required:
-      - Type
-      - Identifier
+      - type
+      - identifier
     properties:
-      Type: 
+      type: 
         type: string
-      Identifier:
+      identifier:
         type: string
   DescriptorType:
     required:
-      - Type
-      - Descriptor
+      - type
+      - descriptor
     properties:
-      Type: 
+      type: 
         type: string
-      Descriptor:
+      descriptor:
         type: string
-      Identifier:
+      identifier:
         type: string
   PersonType:
     required:
-      - Name
-      - Display
+      - name
+      - display
     properties:
-      Name: 
+      name: 
         type: string
-      Display:
+      display:
         type: string
-      Role:
+      role:
         type: string
-      Identifier:
+      identifier:
         type: string
   DateType:
     required:
-      - Type
-      - Date
+      - type
+      - date
     properties:
-      Type: 
+      type: 
         type: string
-      Date:
+      date:
        type: integer
