@@ -26,12 +26,6 @@
         "/": {
             "post": {
                 "description": "Create a new index",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
                 "parameters": [
                     {
                         "name": "indexid",
@@ -84,12 +78,6 @@
             },
             "delete": {
                 "description": "Delete index and all assets in it  \n",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
                 "parameters": [
                     {
                         "name": "indexid",
@@ -126,12 +114,6 @@
         "/{indexid}/{assetid}/": {
             "delete": {
                 "description": "Delete a single asset \n",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
                 "parameters": [
                     {
                         "name": "indexid",

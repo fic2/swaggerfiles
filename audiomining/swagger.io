@@ -13,17 +13,13 @@ basePath: /
 schemes:
   - http
 consumes:
-  - application/json
+  - "application/json"
 produces:
-  - application/json
+  - "application/json"
 paths:
   /:
     post:
       description: Create a new index
-      consumes:
-        - application/json
-      produces: 
-        - application/json
       parameters:
         - name: indexid
           in: query
@@ -58,10 +54,6 @@ paths:
           description: AnalysisResponseType
     delete:
       description: "Delete index and all assets in it  \n"
-      consumes:
-        - application/json
-      produces: 
-        - application/json
       parameters:
         - name: indexid
           in: path
@@ -85,10 +77,6 @@ paths:
   '/{indexid}/{assetid}/':
     delete:
       description: "Delete a single asset \n"
-      consumes:
-        - application/json
-      produces: 
-        - application/json
       parameters:
         - name: indexid
           in: path
