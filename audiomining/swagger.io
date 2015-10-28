@@ -21,10 +21,9 @@ paths:
     post:
       description: Create a new index
       consumes:
-        - text/plain
+        - application/json
       produces: 
         - application/json
-        - application/xml
       parameters:
         - name: indexid
           in: query

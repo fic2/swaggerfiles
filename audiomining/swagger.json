@@ -27,11 +27,10 @@
             "post": {
                 "description": "Create a new index",
                 "consumes": [
-                    "text/plain"
+                    "application/json"
                 ],
                 "produces": [
-                    "application/json",
-                    "application/xml"
+                    "application/json"
                 ],
                 "parameters": [
                     {
