@@ -15,15 +15,12 @@ schemes:
 consumes:
   - application/json
 produces:
-  - "application/json;charset=utf-8"
-  - "application/xml;charset=utf-8"
-  - "text/xml;charset=utf-8"
+  - application/json
+  - text/html
 paths:
   /:
     post:
       description: Create a new index
-      consumes:
-        - "text/plain"
       parameters:
         - name: indexid
           in: query
