@@ -13,13 +13,17 @@ basePath: /
 schemes:
   - http
 consumes:
-  - "application/json"
+  - application/json
 produces:
-  - "application/json"
+  - "application/json;charset=utf-8"
+  - "application/xml;charset=utf-8"
+  - "text/xml;charset=utf-8"
 paths:
   /:
     post:
       description: Create a new index
+      consumes:
+        - "text/plain"
       parameters:
         - name: indexid
           in: query
