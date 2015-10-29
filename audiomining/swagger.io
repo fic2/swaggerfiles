@@ -2,7 +2,7 @@ swagger: '2.0'
 info:
   version: '1.6.3'
   title: Audio Mining SE
-  description: Analyze and explore audio visual media
+  description: "Analyze and explore audio visual media\n\n Please note: Some Swagger UIs have trouble with creating or deleting an index and deleting an asset. Those UIs interpret an empty request body as 'text/plain' instead of 'application/json' and change the request's content type. You can run these operations via http://195.220.224.14:49154 directly."
   termsOfService: 'see http://mediafi.org/?portfolio=audio-mining#tab-terms-conditions'
   contact:
     name: Heike Horstmann
@@ -16,7 +16,6 @@ consumes:
   - application/json
 produces:
   - application/json
-  - text/html
 paths:
   /:
     post:
