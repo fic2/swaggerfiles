@@ -1,20 +1,15 @@
 {
   "apiVersion" : "1.1.0",
-  "swaggerVersion" : "2.0",
+  "swaggerVersion" : "1.2",
+  "apis" : [ {
+    "path" : "/asset.{format}",
+    "description" : "Asset Operations"
+  }, {
+    "path" : "/transaction.{format}",
+    "description" : "Transaction operations"
+  } ],
   "info" : {
     "title" : "Atlas REST API"
   },
-  "basePath" : "/atlas/rest",
-  "host": "130.206.80.175",
-  "schemes": [
-    "http"
-  ],
-  "paths" : {
-    "/asset.{format}" : {
-      "summary" : "Asset Operations"
-    },
-    "/transaction.{format}" : {
-      "summary" : "Transaction operations"
-    }
-  }
+  "basePath" : "/atlas/rest"
 }
