@@ -1,6 +1,10 @@
 {
   "apiVersion" : "1.1.0",
   "swaggerVersion" : "1.2",
+  "host": "130.206.80.175",
+  "schemes": [
+    "http"
+  ],
   "apis" : [ {
     "path" : "/asset.{format}",
     "description" : "Asset Operations"
