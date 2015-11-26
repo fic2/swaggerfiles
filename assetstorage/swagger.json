@@ -1,15 +1,204 @@
 {
-  "apiVersion" : "1.1.0",
-  "swaggerVersion" : "1.2",
-  "apis" : [ {
-    "path" : "/asset.{format}",
-    "description" : "Asset Operations"
-  }, {
-    "path" : "/transaction.{format}",
-    "description" : "Transaction operations"
-  } ],
+  "swagger" : "2.0",
   "info" : {
+    "version" : "1.1.0",
     "title" : "Atlas REST API"
   },
-  "basePath" : "/atlas/rest"
+  "basePath" : "/atlas/rest",
+  "tags" : [ {
+    "name" : "transaction"
+  }, {
+    "name" : "asset"
+  } ],
+  "paths" : {
+    "/asset" : {
+      "get" : {
+        "tags" : [ "asset" ],
+        "summary" : "Retrieve asset list",
+        "description" : "Retrieves a list of assets from the server. The List contains URI to the assets. The List comes in json format.",
+        "operationId" : "retrieveAssetList",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "type" : "string"
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/asset/{assetName}" : {
+      "put" : {
+        "tags" : [ "asset" ],
+        "summary" : "Upload asset to storage.",
+        "description" : "The asset should be within a zip file. If you choose a new asset name a new asset is created. If you choose an existing a new revision of the existing asset is added. The Response contains the URI to the transactions associated with the uploaded asset.",
+        "operationId" : "uploadZipAssetToScratchStorage",
+        "consumes" : [ "application/zip", "application/x-zip-compressed" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Asset as a zip file",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/InputStream"
+          }
+        }, {
+          "name" : "assetName",
+          "in" : "path",
+          "description" : "Asset name",
+          "required" : true,
+          "type" : "string",
+          "enum" : [ "([A-Za-z][A-Za-z0-9_-]*)" ]
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "string"
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error."
+          }
+        }
+      }
+    },
+    "/asset/{assetName}/[^.]+?)?}{extension : (\\.\\w+)?}" : {
+      "get" : {
+        "tags" : [ "asset" ],
+        "summary" : "Get encoded asset by asset name and (optional) path.",
+        "description" : "Subassets are adressed via its assetpath.",
+        "operationId" : "getEncodedAsset",
+        "parameters" : [ {
+          "name" : "assetName",
+          "in" : "path",
+          "description" : "Asset name",
+          "required" : true,
+          "type" : "string",
+          "pattern" : " ([A-Za-z][A-Za-z0-9_-]*)}{subassetPath: ",
+          "enum" : [ "([A-Za-z][A-Za-z0-9_-]*)" ]
+        }, {
+          "name" : "extension",
+          "in" : "path",
+          "description" : "File extension",
+          "required" : true,
+          "type" : "string",
+          "enum" : [ "(\\.\\w+)?" ]
+        }, {
+          "name" : "subassetPath",
+          "in" : "path",
+          "description" : "Path to the subasset",
+          "required" : true,
+          "type" : "string",
+          "enum" : [ "(/[^.]+?)?" ]
+        }, {
+          "name" : "includeChildren",
+          "in" : "query",
+          "description" : "Include child assets",
+          "required" : false,
+          "type" : "boolean",
+          "enum" : [ "true or false" ]
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "object"
+            }
+          },
+          "404" : {
+            "description" : "Entity not found"
+          },
+          "406" : {
+            "description" : "Content type is not acceptable"
+          },
+          "500" : {
+            "description" : "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/transaction/{id}" : {
+      "get" : {
+        "tags" : [ "transaction" ],
+        "summary" : "Get a transaction.",
+        "description" : "If the transaction status is finished, the transaction will be removedand all further requests to this transaction will resolve in a 404 Error.",
+        "operationId" : "handleGetTransaction",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "Transaction id",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/AssetTransaction"
+            }
+          },
+          "404" : {
+            "description" : "Transaction not found"
+          },
+          "500" : {
+            "description" : "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "AssetTransaction" : {
+      "properties" : {
+        "location" : {
+          "type" : "string",
+          "description" : "Location of the asset",
+          "readOnly" : true
+        },
+        "id" : {
+          "type" : "string",
+          "description" : "Id of the transaction",
+          "readOnly" : true
+        },
+        "detail" : {
+          "type" : "string",
+          "description" : "Details from the import, e.g. errors or warning that came up during the import",
+          "readOnly" : true
+        },
+        "status" : {
+          "type" : "string",
+          "description" : "Status of the transaction",
+          "readOnly" : true,
+          "enum" : [ "RECEIVED", "ACCEPTED", "REJECTED", "PROCESSING", "FINISHED" ]
+        },
+        "assetName" : {
+          "type" : "string",
+          "description" : "Asset name",
+          "readOnly" : true
+        },
+        "statusDescription" : {
+          "type" : "string",
+          "description" : "Description of the status",
+          "readOnly" : true
+        },
+        "importedAs" : {
+          "type" : "string",
+          "description" : "Imported data type",
+          "readOnly" : true
+        }
+      }
+    },
+    "InputStream" : {
+      "type" : "object"
+    }
+  }
 }
