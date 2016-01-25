@@ -5,6 +5,10 @@
     "title" : "Atlas REST API"
   },
   "basePath" : "/atlas/rest",
+  "host" : "195.220.224.13:10201",
+  "schemes" : [
+    "http"
+  ],
   "tags" : [ {
     "name" : "transaction"
   }, {
