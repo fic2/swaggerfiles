@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  version: '1.6.3'
+  version: '2.1.6'
   title: Audio Mining SE
   description: "Analyze and explore audio visual media\n\n Please note: Some Swagger UIs have trouble with the try-it-out function creating or deleting an index or deleting an asset. Those UIs interpret an empty request body as 'text/plain' instead of 'application/json' and change the request's content type. You can run these operations via http://195.220.224.14:49154 directly."
   termsOfService: 'see http://mediafi.org/?portfolio=audio-mining#tab-terms-conditions'
@@ -17,7 +17,7 @@ consumes:
 produces:
   - application/json
 paths:
-  /:
+  '/':
     post:
       description: Create a new index
       parameters:
@@ -29,11 +29,11 @@ paths:
         - name: language
           in: query
           description: Desired language
-          required: true
+          required: false
           type: string
       responses:
         '201':
-          description: ObjectUpdateResponseType
+          description: RestResourceUpdateResponse
   '/{indexid}/':
     post:
       description: "Insert a new asset and analyze it \n"
@@ -160,8 +160,7 @@ paths:
           description: AssetStatusResponseType
   '/{indexid}/{assetid}/structure':
     get:
-      description: |
-        Obtain asset segmentation structure
+      description: "Obtain asset segmentation structure \n"
       parameters:
         - name: indexid
           in: path
@@ -211,6 +210,7 @@ paths:
       responses:
         '200':
           description: SearchResponseType
+            
 definitions:
   SearchRequestType:
     required:
@@ -252,10 +252,10 @@ definitions:
     properties:
       genre:
         $ref: '#/definitions/Genre'
+      structuralAnalysisConfig:
+        $ref: '#/definitions/StructuralAnalysisConfig'        
       speechRecognitionConfig:
         $ref: '#/definitions/SpeechRecognitionConfig'
-      structuralAnalysisConfig:
-        $ref: '#/definitions/StructuralAnalysisConfig'
       speakerRecognitionConfig:
         $ref: '#/definitions/SpeakerRecognitionConfig'
       externalMetadata:
@@ -288,9 +288,9 @@ definitions:
         type: string
   StructuralAnalysisConfig:
     properties:
-      segmentationFlag:
+      doStructuralAnalysis:
         type: boolean
-      speechDetectionFlag:
+      doWordSpeechRecognition:
         type: boolean
       speakerClusteringFlag:
         type: boolean
