@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "version": "1.6.3",
+        "version": "2.1.6",
         "title": "Audio Mining SE",
         "description": "Analyze and explore audio visual media\n\n Please note: Some Swagger UIs have trouble with the try-it-out function creating or deleting an index or deleting an asset. Those UIs interpret an empty request body as 'text/plain' instead of 'application/json' and change the request's content type. You can run these operations via http://195.220.224.14:49154 directly.",
         "termsOfService": "see http://mediafi.org/?portfolio=audio-mining#tab-terms-conditions",
@@ -38,13 +38,13 @@
                         "name": "language",
                         "in": "query",
                         "description": "Desired language",
-                        "required": true,
+                        "required": false,
                         "type": "string"
                     }
                 ],
                 "responses": {
                     "201": {
-                        "description": "ObjectUpdateResponseType"
+                        "description": "RestResourceUpdateResponse"
                     }
                 }
             }
@@ -379,11 +379,11 @@
                 "genre": {
                     "$ref": "#/definitions/Genre"
                 },
-                "speechRecognitionConfig": {
-                    "$ref": "#/definitions/SpeechRecognitionConfig"
-                },
                 "structuralAnalysisConfig": {
                     "$ref": "#/definitions/StructuralAnalysisConfig"
+                },
+                "speechRecognitionConfig": {
+                    "$ref": "#/definitions/SpeechRecognitionConfig"
                 },
                 "speakerRecognitionConfig": {
                     "$ref": "#/definitions/SpeakerRecognitionConfig"
@@ -435,10 +435,10 @@
         },
         "StructuralAnalysisConfig": {
             "properties": {
-                "segmentationFlag": {
+                "doStructuralAnalysis": {
                     "type": "boolean"
                 },
-                "speechDetectionFlag": {
+                "doWordSpeechRecognition": {
                     "type": "boolean"
                 },
                 "speakerClusteringFlag": {
